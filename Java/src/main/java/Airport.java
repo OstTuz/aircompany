@@ -63,7 +63,6 @@ public class Airport {
         return transportMilitaryPlanes;
     }
 
-    ///3  same methods getPassengerPlanes getMilitaryPlanes and getExperimentalPlanes
     public List<ExperimentalPlane> getExperimentalPlanes() {
         List<ExperimentalPlane> experimentalPlanes = new ArrayList<>();
         for (Plane plane : planes) {
