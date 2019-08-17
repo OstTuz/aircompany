@@ -1,4 +1,5 @@
-import Planes.experimentalPlane;
+import Planes.ExperimentalPlane;
+import models.ClassificationLevel;
 import models.MilitaryType;
 import Planes.MilitaryPlane;
 import Planes.PassengerPlane;
@@ -63,11 +64,11 @@ public class Airport {
     }
 
     ///3  same methods getPassengerPlanes getMilitaryPlanes and getExperimentalPlanes
-    public List<experimentalPlane> getExperimentalPlanes() {
-        List<experimentalPlane> experimentalPlanes = new ArrayList<>();
+    public List<ExperimentalPlane> getExperimentalPlanes() {
+        List<ExperimentalPlane> experimentalPlanes = new ArrayList<>();
         for (Plane plane : planes) {
-            if (plane instanceof experimentalPlane) {
-                experimentalPlanes.add((experimentalPlane) plane);
+            if (plane instanceof ExperimentalPlane) {
+                experimentalPlanes.add((ExperimentalPlane) plane);
             }
         }
         return experimentalPlanes;
@@ -108,6 +109,41 @@ public class Airport {
         for (Plane plane:planes) {
             System.out.println(plane);
         }
+    }
+
+    public List<MilitaryPlane> getBomberPlanesFromMilitary()
+    {
+        List<MilitaryPlane> bomberPlanes = new ArrayList<>();
+        for (MilitaryPlane militaryPlane: getMilitaryPlanes()) {
+            if (militaryPlane.getType() == MilitaryType.BOMBER)
+            {
+                bomberPlanes.add(militaryPlane);
+            }
+        }
+        return bomberPlanes;
+    }
+
+    public List<ExperimentalPlane> getUnclassifiedPlanes()
+    {
+        List<ExperimentalPlane> unclassifiedPlanes = new ArrayList<>();
+        for (ExperimentalPlane experimentalPlane: getExperimentalPlanes()) {
+            if (experimentalPlane.getClassificationLevel() == ClassificationLevel.UNCLASSIFIED)
+            {
+                unclassifiedPlanes.add(experimentalPlane);
+            }
+        }
+        return unclassifiedPlanes;
+    }
+
+    public boolean isSortedByMaxLoadCapacity() {
+        boolean nextPlaneMaxLoadCapacityIsHigherThanCurrent = true;
+        for (int i = 0; i < sortByMaxLoadCapacity().planes.size() - 1; i++) {
+            if (sortByMaxLoadCapacity().planes.get(i).getMaxLoadCapacity() > sortByMaxLoadCapacity().planes.get(i + 1).getMaxLoadCapacity()) {
+                nextPlaneMaxLoadCapacityIsHigherThanCurrent = false;
+                break;
+            }
+        }
+        return nextPlaneMaxLoadCapacityIsHigherThanCurrent;
     }
 
     @Override
